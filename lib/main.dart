@@ -11,16 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Form App',
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Sample Form App'),
+        title: 'Form App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
         ),
-        body: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15),
-            child: LoginPage()),
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        home: LoginPage(
+          firstLaunch: true,
+        ));
   }
 }
