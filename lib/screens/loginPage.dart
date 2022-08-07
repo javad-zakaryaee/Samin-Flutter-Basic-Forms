@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'signUpPage.dart';
+import '../validators/loginPageValidators.dart';
 
 class LoginPage extends StatefulWidget {
   bool firstLaunch;
@@ -22,12 +23,12 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        actionsIconTheme: const IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.black),
+        actionsIconTheme: IconThemeData(color: Colors.black),
         centerTitle: true,
         leading: !widget.firstLaunch
             ? IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new),
+                icon: Icon(Icons.arrow_back_ios_new),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -35,13 +36,13 @@ class _LoginPageState extends State<LoginPage> {
             : null,
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage("images/login_background.png"),
               fit: BoxFit.cover),
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(40, 120, 50, 0),
+          padding: EdgeInsets.fromLTRB(40, 140, 50, 0),
           child: Column(
             children: [
               Container(
@@ -56,22 +57,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 170, bottom: 30),
+                margin: const EdgeInsets.only(top: 170, bottom: 30),
                 child: Form(
                   key: emailFormKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFormField(
-                        validator: (value) {
-                          if (value == null ||
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(value)) {
-                            return 'Enter a valid email';
-                          } else {
-                            return null;
-                          }
-                        },
+                        validator: emailValidator,
                         decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.email,
@@ -82,14 +75,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       TextFormField(
                         obscureText: true,
-                        validator: (value) {
-                          if (value == null || value.length < 8) {
-                            return 'Password cant be less than 8 characters';
-                          } else {
-                            return null;
-                          }
-                        },
-                        decoration: const InputDecoration(
+                        validator: passworValidator,
+                        decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock),
                             border: UnderlineInputBorder(),
                             labelText: 'Password'),
@@ -104,8 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                 child: GestureDetector(
                   onTap: () {
                     if (emailFormKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('You did it!')));
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text('You did it!')));
                     }
                   },
                   child: Container(
@@ -118,7 +105,9 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           'Log In',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              color: Color(0xff1f3449),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         ),
                         CircleAvatar(
                           radius: 40,
@@ -130,7 +119,12 @@ class _LoginPageState extends State<LoginPage> {
                               Icons.arrow_forward,
                               size: 35,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              if (emailFormKey.currentState!.validate()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('You did it!')));
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -138,35 +132,38 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(primary: Color(0xff1f3449)),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()),
-                        );
-                      },
-                      child: const Text(
-                        'Sign Up',
-                        style: TextStyle(fontFamily: 'Mutka'),
+              Container(
+                margin: EdgeInsets.only(left: 10, top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xff1f3449)),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()),
+                          );
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(fontFamily: 'Mutka'),
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(color: Color(0xff1f3449)),
-                        )),
-                  )
-                ],
+                    Expanded(
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(color: Color(0xff1f3449)),
+                          )),
+                    )
+                  ],
+                ),
               )
             ],
           ),

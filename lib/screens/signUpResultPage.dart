@@ -7,6 +7,7 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime birthdate = resultData['birthdate'];
     return Scaffold(
       body: Center(
         child: Text(
