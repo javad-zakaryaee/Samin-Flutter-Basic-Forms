@@ -4,5 +4,5 @@ Practicing basic forms and validation in flutter
 
 ## Images
 
-![login screenshot] [images/login_screenshot.png]
-![signup screenshot] [images/signup_screenshot.png]
+![login screenshot](https://github.com/javad-zakaryaee/flutter_form_practice/blob/master/images/login_screenshot.png)
+![sign up screenshot](https://github.com/javad-zakaryaee/flutter_form_practice/blob/master/images/signup_screenshot.png)
