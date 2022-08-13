@@ -3,6 +3,5 @@
 Practicing basic forms and validation in flutter
 
 ## Images
-
-![login screenshot](https://github.com/javad-zakaryaee/flutter_form_practice/blob/master/images/login_screenshot.png =300x650)
-![sign up screenshot](https://github.com/javad-zakaryaee/flutter_form_practice/blob/master/images/signup_screenshot.png =300x650)
+<img src="https://github.com/javad-zakaryaee/flutter_form_practice/blob/master/images/login_screenshot.png" width="200" height="450">
+<img src="https://github.com/javad-zakaryaee/flutter_form_practice/blob/master/images/signup_screenshot.png" width="200" height="450">
